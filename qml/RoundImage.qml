@@ -1,0 +1,39 @@
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtGraphicalEffects 1.0
+
+Item {
+    property string imgSrc: "qrc:/images/player"
+    property int borderRadius_: 5
+
+    Image{
+        id: image
+        anchors.centerIn: parent
+        asynchronous: true
+        source: imgSrc
+        smooth: true
+        visible: false
+        width: parent.width
+        height: parent.height
+        fillMode: Image.PreserveAspectCrop
+        antialiasing: true
+    }
+
+    Rectangle{
+        id:mask
+        color: "black"
+        anchors.fill: parent
+        radius: borderRadius_
+        visible: false
+        smooth: true
+        antialiasing: true
+    }
+
+    OpacityMask{
+        anchors.fill: image
+        source: image
+        maskSource: mask
+        visible: true
+        antialiasing: true
+    }
+}
